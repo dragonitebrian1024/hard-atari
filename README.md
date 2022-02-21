@@ -1,2 +1,2 @@
-# hard-atari
-a hard version of atari
+# hard-atari-breakout
+a hard version of atari breakout
