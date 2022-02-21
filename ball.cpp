@@ -1,4 +1,7 @@
 #include "ball.h"
+#include "texturemanager.h"
+
+
 
 Ball::~Ball()
 {
@@ -9,12 +12,7 @@ void Ball::init(SDL_Renderer* renderer, int x, int y)
 {
     x = 400;
     y = 200;
-    IMG_Init(IMG_INIT_PNG);
-
-    SDL_Surface* image = IMG_Load("ball.png");
-
-    m_image = SDL_CreateTextureFromSurface(renderer, image);
-    SDL_FreeSurface(image);
+    TextureManager::LoadTexture("ball.png");
 
     IMG_Quit();
 
