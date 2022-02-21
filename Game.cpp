@@ -82,7 +82,7 @@ void Game::clean()
 {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-
+        ball->~Ball();
 	SDL_Quit();
 	std::cout << "game cleaned" << std::endl;
 }
