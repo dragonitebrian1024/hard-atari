@@ -18,6 +18,8 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
 
 	int flags = 0;
 
+	SDL_RenderSetLogicalSize(renderer, 600, 800);
+
 	if (fullscreen)
 	{
 		flags = SDL_WINDOW_FULLSCREEN;
@@ -26,7 +28,7 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
 		std::cout << "Subsystems initialised" << std::endl;
-		window = SDL_CreateWindow("random pong", xpos, ypos, width, height, flags);
+		window = SDL_CreateWindow("hard atari", xpos, ypos, width, height, flags);
 		SDL_INIT_EVERYTHING;
 
 		if (window)
@@ -42,7 +44,9 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
 			std::cout << "renderer created" << std::endl;
 		}
 
-		
+		ball = new Ball();
+
+		ball->init(renderer, (400 / 2) - 12, (400 / 2) - 12);
 
 		isRunning = true;
 	}
@@ -53,12 +57,13 @@ void Game::init(std::string title, int xpos, int ypos, int width, int height, bo
 
 void Game::update(double delta_time)
 {
-	ball->update(delta_time);
+	ball->update(1.0/60.0);
 }
 
 void Game::render()
 {
 	SDL_RenderClear(renderer);
+
 	ball->draw(renderer);
 	SDL_RenderPresent(renderer);
 }
@@ -82,7 +87,7 @@ void Game::clean()
 {
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-        ball->~Ball();
+	ball->~Ball();
 	SDL_Quit();
 	std::cout << "game cleaned" << std::endl;
 }
