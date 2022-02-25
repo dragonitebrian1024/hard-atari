@@ -12,7 +12,7 @@ void Ball::init(SDL_Renderer* renderer, int x, int y)
 {
     x = 400;
     y = 200;
-    TextureManager::LoadTexture("ball.png");
+   m_image = TextureManager::LoadTexture("ball.png");
 
     IMG_Quit();
 
